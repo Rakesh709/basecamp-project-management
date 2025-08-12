@@ -155,7 +155,7 @@ const logoutUser = asyncHandler(async (req, res, next) => {
 });
 
 const currentUser = asyncHandler(async (req, res, next) => {
-  return req
+  return res
     .status(200)
     .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
 });
@@ -321,7 +321,7 @@ const resetForgotPassword = asyncHandler (async (req, res, next) =>{
     let hashedToken = crypto
                         .createHash("sha256")
                         .update(resetToken)
-                        digest("hex")
+                        .digest("hex")
 
    const user = await User.findOne({
         forgotPasswordToken:hashedToken,
